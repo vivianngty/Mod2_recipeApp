@@ -233,7 +233,7 @@ function RecipeDetail ({match}) {
     console.log (match);
   }, []);
 
-  const [ recipe, setRecipe ] = useState({});
+  const [ recipe, setRecipe ] = useState([]);
 
   const fetchRecipe = async() => {
     try{
@@ -249,6 +249,7 @@ function RecipeDetail ({match}) {
 
   return (
     <div>
+      
         { recipe.map (step => <div> <h1> {step.step} </h1> </div> )}
     </div>
   )
