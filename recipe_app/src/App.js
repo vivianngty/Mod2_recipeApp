@@ -8,8 +8,9 @@ import {
 import axios from 'axios';
 import './App.css';
 import Footer from './Footer'
-import fridge from './fridge.png';
 import Searchbycuisine from './Searchbycuisine'
+import Header from './Header'
+import HomeContent from './HomeContent'
 
 
 // another api key: 1008e28e8a29463385650478c9017f49
@@ -26,6 +27,7 @@ class App extends React.Component {
   render(){
     return(
       <div>
+        <Header />
         <Router>
             <div className="nav">
               <ul>
@@ -83,10 +85,7 @@ class Home extends React.Component {
   render() {
     return(
       <div>
-       <h1>Welcome to recipe-land</h1>
-       <br />
-       <h1>Don't know what to cook? No worries. We gotchu!</h1>{/* <hr className="line" /> */}
-       <img className="fridgeImage" src={fridge} alt ="fridge-image" />
+       <HomeContent />
       </div>
     )
   }
@@ -239,7 +238,7 @@ function RecipeDetail ({match}) {
   const fetchRecipe = async() => {
     const fetchRecipe = await fetch ( `https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=0948bc163b8946b7babe602438de08d4` );
     const recipe = await fetchRecipe.json();
-    setRecipe(recipe);
+    setRecipe(recipe.data);
 
 /*     console.log (recipe); */
     console.log (recipe[0])
@@ -248,7 +247,8 @@ function RecipeDetail ({match}) {
 
   return (
     <div>
-      {
+      <h3>Detail</h3>
+      {/* {
         recipe.steps && recipe.steps.map (step => {
           return(
             <div>
@@ -256,7 +256,7 @@ function RecipeDetail ({match}) {
             </div>
           )
         })
-      }     
+      }      */}
     </div>
   )
 }
