@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/vivianngtyRecipeApp/static/css/main.cbd7e073.chunk.css",
+    "main.js": "/vivianngtyRecipeApp/static/js/main.b49eec22.chunk.js",
+    "main.js.map": "/vivianngtyRecipeApp/static/js/main.b49eec22.chunk.js.map",
+    "runtime-main.js": "/vivianngtyRecipeApp/static/js/runtime-main.db01b666.js",
+    "runtime-main.js.map": "/vivianngtyRecipeApp/static/js/runtime-main.db01b666.js.map",
+    "static/js/2.80f64eeb.chunk.js": "/vivianngtyRecipeApp/static/js/2.80f64eeb.chunk.js",
+    "static/js/2.80f64eeb.chunk.js.map": "/vivianngtyRecipeApp/static/js/2.80f64eeb.chunk.js.map",
+    "static/js/3.eb3e48ab.chunk.js": "/vivianngtyRecipeApp/static/js/3.eb3e48ab.chunk.js",
+    "static/js/3.eb3e48ab.chunk.js.map": "/vivianngtyRecipeApp/static/js/3.eb3e48ab.chunk.js.map",
+    "index.html": "/vivianngtyRecipeApp/index.html",
+    "static/css/main.cbd7e073.chunk.css.map": "/vivianngtyRecipeApp/static/css/main.cbd7e073.chunk.css.map",
+    "static/js/2.80f64eeb.chunk.js.LICENSE.txt": "/vivianngtyRecipeApp/static/js/2.80f64eeb.chunk.js.LICENSE.txt",
+    "static/media/fridge.af600c7e.png": "/vivianngtyRecipeApp/static/media/fridge.af600c7e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.db01b666.js",
+    "static/js/2.80f64eeb.chunk.js",
+    "static/css/main.cbd7e073.chunk.css",
+    "static/js/main.b49eec22.chunk.js"
+  ]
+}
