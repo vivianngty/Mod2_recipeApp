@@ -236,27 +236,20 @@ function RecipeDetail ({match}) {
   const [ recipe, setRecipe ] = useState({});
 
   const fetchRecipe = async() => {
-    const fetchRecipe = await fetch ( `https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=0948bc163b8946b7babe602438de08d4` );
-    const recipe = await fetchRecipe.json();
-    setRecipe(recipe.data);
-
+    try{
+      const fetchRecipe = await axios.get (`https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=0948bc163b8946b7babe602438de08d4`);
+      setRecipe (fetchRecipe.data[0].steps)
+      console.log (fetchRecipe.data[0].steps)
+    } catch (error) {
+      console.error (error)
+    }
 /*     console.log (recipe); */
-    console.log (recipe[0])
-    console.log (recipe[0].steps[0].step)
+    
   };
 
   return (
     <div>
-      <h3>Detail</h3>
-      {/* {
-        recipe.steps && recipe.steps.map (step => {
-          return(
-            <div>
-              <h3>{step.step}</h3>
-            </div>
-          )
-        })
-      }      */}
+        { recipe.map (step => <div> <h1> {step.step} </h1> </div> )}
     </div>
   )
 }
