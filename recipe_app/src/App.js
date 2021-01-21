@@ -199,33 +199,8 @@ class Searchbyingredients extends React.Component {
   }
 }
 /* --------------------------------------------------------/searchbyingredients/id------------------------------------------------------------------ */
-// https://api.spoonacular.com/recipes/324694/analyzedInstructions?apiKey=1008e28e8a29463385650478c9017f49class RecipeDetail extends React.Component{
-/* class RecipeDetail extends React.Component{
-  constructor(props, {match}){
-    super(props)
-
-    this.state={}
-  }
-  async getDetail () { 
-    try {
-      const res = await axios.get(`https://api.spoonacular.com/recipes/${this.props.match.params.id}/analyzedInstructions?apiKey=1008e28e8a29463385650478c9017f49`);
-      console.log (res.data)
-       this.setState({ recipes: res.data }) 
-    } catch (e) {
-      console.error(e,e.message);
-    }
-  }
-  componentDidMount(){
-    this.getDetail();
-  }
-  render(){
-    return(
-      <div>
-        <h1>Detail</h1>
-      </div>
-    )
-  }
-}  */
+// https://api.spoonacular.com/recipes/324694/analyzedInstructions?apiKey=1008e28e8a29463385650478c9017f49
+// https://api.spoonacular.com/recipes/716429/information?apiKey=0948bc163b8946b7babe602438de08d4&includeNutrition=false
 
 function RecipeDetail ({match}) {
   useEffect ( () => {
@@ -234,7 +209,7 @@ function RecipeDetail ({match}) {
   }, []);
 
   const [ recipe, setRecipe ] = useState([]);
-
+  /* const [ info, setInfo ] = useState ([]); */
   const fetchRecipe = async() => {
     try{
       const fetchRecipe = await axios.get (`https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=0948bc163b8946b7babe602438de08d4`);
@@ -244,13 +219,41 @@ function RecipeDetail ({match}) {
       console.error (error)
     }
 /*     console.log (recipe); */
-    
   };
+  useEffect ( () => {
+    fetchInfo();
+  }, [])
+  const [ info, setInfo ] = useState ([]);
+  const fetchInfo = async() => {
+    try{
+      const res = await axios.get (`https://api.spoonacular.com/recipes/${match.params.id}/information?apiKey=0948bc163b8946b7babe602438de08d4&includeNutrition=false`)
+      setInfo (res.data)
+      console.log (res.data)
+    }catch(error){
+      console.error (error,error.message)
+    }
+  }
+  /* const getInfo = async () => {
+    try{
+      const getInfo = await axios.get (`https://api.spoonacular.com/recipes/${match.params.id}/information?apiKey=0948bc163b8946b7babe602438de08d4&includeNutrition=false`);
+      setInfo(getInfo.data);
+      console.log (getInfo.data)
+    } catch (e){
+      console.error (e)
+    }
+  } */
+  /* const infoMap = info.map ( info => <div><h3>{info.title}</h3><img src= {info.image} /></div>) */ 
 
   return (
-    <div>
-      
-        { recipe.map (step => <div> <h1> {step.step} </h1> </div> )}
+     <div>
+          <h2>{info.title}</h2>
+          <img src ={info.image} />
+        { recipe.map (step => 
+        <div className="recipeStep"> 
+          <h5> {step.number} </h5> <br></br>
+          <h5> {step.step} </h5>
+        </div> 
+        )}
     </div>
   )
 }
