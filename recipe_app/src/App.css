@@ -134,10 +134,13 @@ div.footer{
   color:rgb(33, 124, 33);
 }
 
-.recipeStep{
-  display: inline;
+.ingre{
+  padding-top: 25px;
 }
 
+.searchbyingredientStep{
+  line-height: 50px;
+}
 
 
 

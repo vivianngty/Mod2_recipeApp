@@ -53,6 +53,7 @@ class App extends React.Component {
                 <Route path="/randomrecipe">
                   <Getrandomrecipe />
                 </Route>
+
                 <Route path="/searchbyingredients" exact>
                   <Searchbyingredients />
                 </Route>
@@ -73,10 +74,6 @@ class App extends React.Component {
             <Footer />
           
       </div>
-      
-
-      
-
     )
   }
 }
@@ -91,16 +88,18 @@ class Home extends React.Component {
   }
 }
 /* ---------------------------------------------------GET RANDOM RECIPE Component ------------------------------------------------------------ */
+//<Link to={`/searchbyingredients/${recipe.id}`}> { recipe.title } </Link>
+
 class Getrandomrecipe extends React.Component {
   constructor(props){
     super(props);
     this.state = {}
-    /* this.selectRecipe = this.selectRecipe.bind(this); */
   }
   async getRandomRecipes (){
     try{
       const res = await axios.get (RANDOM_URL);
       this.setState ({ recipes: res.data })
+
     } catch (error) {
       console.log (error)
     }
@@ -199,6 +198,7 @@ class Searchbyingredients extends React.Component {
   }
 }
 /* --------------------------------------------------------/searchbyingredients/id------------------------------------------------------------------ */
+
 // https://api.spoonacular.com/recipes/324694/analyzedInstructions?apiKey=1008e28e8a29463385650478c9017f49
 // https://api.spoonacular.com/recipes/716429/information?apiKey=0948bc163b8946b7babe602438de08d4&includeNutrition=false
 
@@ -218,36 +218,39 @@ function RecipeDetail ({match}) {
     } catch (error) {
       console.error (error)
     }
-/*     console.log (recipe); */
+
   };
   useEffect ( () => {
     fetchInfo();
   }, [])
   const [ info, setInfo ] = useState ([]);
+  const [ ingred, setIngred ] = useState ([]);
+
   const fetchInfo = async() => {
     try{
       const res = await axios.get (`https://api.spoonacular.com/recipes/${match.params.id}/information?apiKey=0948bc163b8946b7babe602438de08d4&includeNutrition=false`)
       setInfo (res.data)
       console.log (res.data)
+      setIngred (res.data.extendedIngredients)
+      console.log (res.data.extendedIngredients)
     }catch(error){
       console.error (error,error.message)
     }
   }
-  /* const getInfo = async () => {
-    try{
-      const getInfo = await axios.get (`https://api.spoonacular.com/recipes/${match.params.id}/information?apiKey=0948bc163b8946b7babe602438de08d4&includeNutrition=false`);
-      setInfo(getInfo.data);
-      console.log (getInfo.data)
-    } catch (e){
-      console.error (e)
-    }
-  } */
-  /* const infoMap = info.map ( info => <div><h3>{info.title}</h3><img src= {info.image} /></div>) */ 
 
   return (
      <div>
           <h2>{info.title}</h2>
           <img src ={info.image} />
+          <div className="ingre"> Ingredients:
+            {
+              ingred.map (ingred => 
+              <div>
+                <h5 className="ingredientName">{ingred.name}</h5>
+              </div> 
+              )
+            }
+          </div>
         { recipe.map (step => 
         <div className="recipeStep"> 
           <h5> {step.number} </h5> <br></br>
@@ -258,30 +261,7 @@ function RecipeDetail ({match}) {
   )
 }
 
-
-/* function RecipeDetail ({match}) {
-  useEffect ( () => {
-     fetchRecipe();
-    console.log (match)
-  }, []);
-
-  const [recipe, setRecipe] = useState ({});
-
-  const fetchRecipe = async () =>  {
-    const fetchRecipe = await fetch (`https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=1008e28e8a29463385650478c9017f49`);
-    const recipe = await fetchRecipe.json();
-
-    console.log (recipe);
-  };
-
-  return (
-    <div>
-      <h1>Detail</h1>
-    </div>
-  )
-
-
-}  */
+/* ----------------------------------------------------------------------------------------------------------------------------------*/
 
 
 export default App;
